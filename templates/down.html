@@ -1,11 +1,12 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+    
     <div class="container mt-4">
             {% for i in keys %}
             <div class="mb-3">
                 <input type="radio" class="btn-check" name="itags" id="{{ i }}" autocomplete="off">
-                <label class="btn btn-outline-success" for="{{ i }}">✨{{ itags[i] }} of Size {{ sizes[i] }} mb</label>
+                <label class="btn btn-outline-success" for="{{ i }}">✨{{ itags[i] }} <span class="stext">of Size {{ sizes[i] }} mb</span class="text"></label>
             </div>
             {% endfor %}
     
