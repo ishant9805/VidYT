@@ -5,14 +5,15 @@
     <form action="/down" method="post">
             <div class="mb-3">
                 <label for="url" class="form-label">Enter URL</label>
-                <input type="url" class="form-control" id="url" name="url" placeholder="https://youtu.be/xyz">
+                <input type="url" class="form-control" id="url" name="url" placeholder="🔗 https://youtu.be/xyz">
             </div>
-            <select class="form-select mb-3" name="format" aria-label="Default select example">
-                <option selected disabled>Choose format</option>
-                <option value="audio">Audio</option>
-                <option value="video">Video</option>
-            </select>
-            <button class="btn btn-success" type="submit">Submit</button>
+            <div class="mb-3">
+                <input type="radio" checked class="btn-check" name="format" id="audio" value="audio" autocomplete="off">
+                <label class="btn" for="audio">Audio 🎧</label>
+                <input type="radio" class="btn-check" name="format" value="video" id="video" autocomplete="off">
+                <label class="btn" for="video">Video 🎥</label>
+            </div>
+            <button class="btn btn-success" type="submit">Submit 👉</button>
         </form>
     </div>
 
