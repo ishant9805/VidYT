@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div class="container">
+        <li>
+            {% for format in formats %}
+            <ul>{{ format }}</ul>
+            {% endfor %}
+        </li>
+    
+        <form action="/download">
+            <div class="mb-3">
+                <label for="itag" class="form-label">Enter ITag:</label>
+                <input type="number" class="form-control" id="itag" name="itag" placeholder="12">
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
