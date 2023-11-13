@@ -1,7 +1,8 @@
 import re
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from pytube import YouTube, Stream
-
+import os
+import shutil
 # Create flask instance
 app = Flask(__name__)
 app.secret_key = "123456789"
@@ -25,6 +26,8 @@ def down():
         else:
             formats = vid.streams.filter(progressive=True)
         itags = {}
+        sizes = {}
+        cwd = os.getcwd()
         for f in formats:
             stream_str = str(f)
             match = re.search(r'itag="(\d+)"', stream_str)
@@ -33,7 +36,8 @@ def down():
             else:
                 print("No match found.")
             itags[itag_val] = stream_str
-    return render_template('down.html', formats=formats, itags=itags, keys=itags.keys())
+            sizes[itag_val] = f.filesize_mb
+    return render_template('down.html', formats=formats, itags=itags, keys=itags.keys(), cwd=cwd, sizes=sizes)
 
 @app.route('/dd', methods=["GET", "POST"])
 def dd():
@@ -41,8 +45,17 @@ def dd():
     if request.method == "POST":
         vid = YouTube(url)
         itag = request.form.get("itag")
+        path = request.form.get("targetPath")
         str = vid.streams.get_by_itag(itag)
-        str.download()
+        try:
+            str.download()
+        except Exception as e:
+            print(e)
+        print(str.default_filename)
+        try:
+            shutil.move(os.path.join(os.getcwd(), str.default_filename), path)
+        except Exception as e:
+            print(e)
     return redirect('/')
 
 if __name__ == "__main__":

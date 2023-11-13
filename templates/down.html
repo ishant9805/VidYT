@@ -5,7 +5,7 @@
             {% for i in keys %}
             <div class="mb-3">
                 <input type="radio" class="btn-check" name="itags" id="{{ i }}" autocomplete="off">
-                <label class="btn btn-outline-success" for="{{ i }}">✨{{ itags[i] }}</label>
+                <label class="btn btn-outline-success" for="{{ i }}">✨{{ itags[i] }} of Size {{ sizes[i] }} mb</label>
             </div>
             {% endfor %}
     
@@ -14,25 +14,15 @@
                 <label for="itag" class="form-label">Enter ITag:</label>
                 <input type="number" class="form-control" id="itag" name="itag" placeholder="12">
             </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Choose Folder</label>
+                <input class="form-control" name="targetPath" type="text" id="formFile" value="{{ cwd }}" placeholder="{{ cwd }}">
+            </div>
             <button class="btn btn btn-success" type="submit">Download ⬇️</button>
         </form>
-        <div class="mb-3">
-            <label for="formFile" class="form-label">Choose Folder</label>
-            <input class="form-control" type="file" id="formFile" webkitdirectory directory multiple>
-            <button class="btn btn-danger" onclick="getFolderPath()">Get Path</button>
-        </div>
     </div>
 
     <script>
-        function getFolderPath() {
-            const input = document.getElementById('formFile');
-            if ('webkitdirectory' in input) {
-                const folderPath = input.files[0].webkitRelativePath;
-                alert('Selected folder path: ' + folderPath);
-            } else {
-                alert('Your browser does not support folder selection.');
-            }
-        }
         var radioButtons = document.querySelectorAll('input[name="itags"]');
         var inputTag = document.getElementById('itag');
         
